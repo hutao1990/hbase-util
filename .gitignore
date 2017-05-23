@@ -1,0 +1,12 @@
+# IntelliJ IDEA Project files
+.idea
+*.iml
+*.ipr
+*.iws
+*Test*
+*test*
+# maven file
+dependency-reduced-pom.xml
+target
+derby.log
+metastore_db/
