@@ -245,6 +245,10 @@ object HbaseUtil {
     )
   }
 
+  def convert(map1:(String, mutable.Map[String, mutable.Map[String, String]])):java.util.Map[String, java.util.Map[String, java.util.Map[String, String]]]={
+      Map(map1._1->map1._2).map(m1=>m1._1 -> m1._2.map(m2 => m2._1->m2._2.asJava).asJava).asJava
+  }
+
   /**
     * 解析Result数据
     * @param results
@@ -257,6 +261,11 @@ object HbaseUtil {
       )
     )).toMap
   }
+
+  def converts(map1:Map[String, mutable.Map[String, mutable.Map[String, String]]]):java.util.Map[String, java.util.Map[String, java.util.Map[String, String]]]={
+    map1.map(m1=>m1._1 -> m1._2.map(m2 => m2._1->m2._2.asJava).asJava).asJava
+  }
+
 
   /**
     * 构造Hbase的一行数据的Put(s)
@@ -292,7 +301,7 @@ object HbaseUtil {
     val conn = createHConnection()
     val start = new Date().getTime
     //    println(parseResults(scanWithStartEndRow(conn,"iUserHistorySku","9951419735_0","9951419735_9")))
-    println(parseResults(scanWithPrefix(conn,"iUserHistorySku","72006457599_")))
+    println(parseResults(scanWithPrefix(conn,"gmscm-t-LSXSSPMX","1001,1039034001")))
     val end = new Date().getTime
     println(end-start+"ms")
   }
